@@ -7,16 +7,10 @@
     <bpmn:startEvent id="StartEvent_1">
       <bpmn:outgoing>Flow_102goxd</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:serviceTask id="Activity_1ycj7pa" name="Hiiii">
-      <bpmn:extensionElements />
-      <bpmn:incoming>Flow_102goxd</bpmn:incoming>
-      <bpmn:outgoing>Flow_1ni3cgz</bpmn:outgoing>
-    </bpmn:serviceTask>
     <bpmn:endEvent id="Event_018ox6m">
-      <bpmn:incoming>Flow_1ni3cgz</bpmn:incoming>
+      <bpmn:incoming>Flow_102goxd</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sequenceFlow id="Flow_102goxd" sourceRef="StartEvent_1" targetRef="Activity_1ycj7pa" />
-    <bpmn:sequenceFlow id="Flow_1ni3cgz" sourceRef="Activity_1ycj7pa" targetRef="Event_018ox6m" />
+    <bpmn:sequenceFlow id="Flow_102goxd" sourceRef="StartEvent_1" targetRef="Event_018ox6m" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_10wt42j">
@@ -27,19 +21,11 @@
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
         <dc:Bounds x="242" y="182" width="36" height="36" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0oovna1_di" bpmnElement="Activity_1ycj7pa">
-        <dc:Bounds x="330" y="160" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_018ox6m_di" bpmnElement="Event_018ox6m">
         <dc:Bounds x="482" y="182" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_102goxd_di" bpmnElement="Flow_102goxd">
         <di:waypoint x="278" y="200" />
-        <di:waypoint x="330" y="200" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1ni3cgz_di" bpmnElement="Flow_1ni3cgz">
-        <di:waypoint x="430" y="200" />
         <di:waypoint x="482" y="200" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
