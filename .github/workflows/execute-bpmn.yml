@@ -5,6 +5,8 @@ on: workflow_dispatch
 jobs:
   execute-bpmn:
     runs-on: ubuntu-latest
+    permissions: write-all
+
 
     steps:
       - id: Checkout
