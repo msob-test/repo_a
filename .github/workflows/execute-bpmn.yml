@@ -27,3 +27,11 @@ jobs:
           cp ../process.bpmn ./configuration/resources/
 
           ./start.sh
+      - name: Run BPMN Process
+        run: |
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            -d '{"variables":{}}' \
+            http://localhost:8080/engine-rest/process-definition/key/process_a/start
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
