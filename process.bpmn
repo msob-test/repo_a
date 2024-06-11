@@ -8,6 +8,32 @@
       <bpmn:outgoing>Flow_102goxd</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:serviceTask id="Activity_1ycj7pa" name="Hiiii">
+      <bpmn:extensionElements>
+        <camunda:executionListener event="start">
+          <camunda:script scriptFormat="JavaScript">const xhr = new XMLHttpRequest();
+const url = "https://api.github.com/repos/msob-test/repo_b/actions/workflows/main.yml/dispatches";
+const token = "YOUR_GITHUB_TOKEN";
+const ref = "main";
+
+xhr.open("POST", url, true);
+xhr.setRequestHeader("Content-Type", "application/json");
+xhr.setRequestHeader("Accept", "application/vnd.github.v3+json");
+xhr.setRequestHeader("Authorization", `token ${token}`);
+
+xhr.onreadystatechange = function () {
+  if (xhr.readyState === 4 &amp;&amp; xhr.status === 204) {
+    console.log("Dispatch event successfully sent!");
+  } else if (xhr.readyState === 4 &amp;&amp; xhr.status !== 204) {
+    console.error("Failed to send dispatch event:", xhr.responseText);
+  }
+};
+
+const data = JSON.stringify({ ref });
+
+xhr.send(data);
+</camunda:script>
+        </camunda:executionListener>
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_102goxd</bpmn:incoming>
       <bpmn:outgoing>Flow_1ni3cgz</bpmn:outgoing>
     </bpmn:serviceTask>
