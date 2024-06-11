@@ -2,14 +2,13 @@ name: Execute BPMN
 
 on: workflow_dispatch
 
+permissions:
+  contents: write
+  pull-requests: write
+  repository-projects: write
 jobs:
   execute-bpmn:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pull-requests: write
-      repository-projects: write
-
 
     steps:
       - id: Checkout
