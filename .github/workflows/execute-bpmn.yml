@@ -28,8 +28,7 @@ jobs:
 
           ./start.sh 
           sleep 30
-      - name: Run BPMN Process
-        run: |
+          
           curl -X POST \
             -H "Content-Type: application/json" \
             -d '{"variables":{}}' \
