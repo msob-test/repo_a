@@ -29,9 +29,11 @@ jobs:
           ./start.sh 
           sleep 10
           
-          curl -X POST \
+          response=$(curl -X POST \
             -H "Content-Type: application/json" \
             -d '{"variables":{}}' \
-            http://localhost:8080/engine-rest/process-definition/key/process_a/start
+            http://localhost:8080/engine-rest/process-definition/key/process_a/start)
+
+          echo "Response from curl request process: $response"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
