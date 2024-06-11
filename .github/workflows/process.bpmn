@@ -20,8 +20,8 @@
 curl -X POST \
   -H "Accept: application/vnd.github.v3+json" \
   -H "Authorization: token $GITHUB_TOKEN" \
-  https://api.github.com/repos/msob-test/repo_b/actions/workflows/main.yml/dispatches \
-  -d '{"ref":"main"}'</bpmn:script>
+  https://api.github.com/repos/msob-test/repo_b/dispatches \
+  -d '{"event_type":"trigger-action-b"}'</bpmn:script>
     </bpmn:scriptTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
