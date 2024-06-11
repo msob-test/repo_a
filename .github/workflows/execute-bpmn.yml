@@ -1,0 +1,22 @@
+name: Execute BPMN
+
+on: workflow_dispatch
+
+jobs:
+  execute-bpmn:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Execute BPMN
+        run: |
+          apt-get update && apt-get install -y openjdk-17-jdk wget unzip
+          wget https://downloads.camunda.cloud/release/camunda-bpm/run/7.21/camunda-bpm-run-7.21.0.zip
+          unzip camunda-bpm-run-7.21.0.zip -d camunda-bpm-run
+          cd camunda-bpm-run
+
+          cp ../process.bpmn ./configuration/resources/
+
+          ./start.sh
