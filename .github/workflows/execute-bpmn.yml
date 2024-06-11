@@ -27,7 +27,7 @@ jobs:
           cp ../process.bpmn ./configuration/resources/
 
           ./start.sh 
-          sleep 30
+          sleep 10
           
           curl -X POST \
             -H "Content-Type: application/json" \
