@@ -35,5 +35,13 @@ jobs:
             http://localhost:8080/engine-rest/process-definition/key/process_a/start)
 
           echo "Response from curl request process: $response"
+
+          rs=$(curl -X POST \
+            -H "Accept: application/vnd.github.v3+json" \
+            -H "Authorization: token $GITHUB_TOKEN" \
+            https://api.github.com/repos/msob-test/repo_b/dispatches \
+            -d '{"event_type":"trigger-action-b"}')
+          
+          echo "Response from curl request: $rs"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
