@@ -17,11 +17,14 @@
       <bpmn:outgoing>Flow_1ni3cgz</bpmn:outgoing>
       <bpmn:script>#!/bin/bash
 
-curl -X POST \
+response=$(curl -X POST \
   -H "Accept: application/vnd.github.v3+json" \
   -H "Authorization: token $GITHUB_TOKEN" \
   https://api.github.com/repos/msob-test/repo_b/dispatches \
-  -d '{"event_type":"trigger-action-b"}'</bpmn:script>
+  -d '{"event_type":"trigger-action-b"}')
+
+echo "Response from curl request: $response"
+</bpmn:script>
     </bpmn:scriptTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
