@@ -5,7 +5,10 @@ on: workflow_dispatch
 jobs:
   execute-bpmn:
     runs-on: ubuntu-latest
-    permissions: write-all
+    permissions:
+      contents: write
+      pull-requests: write
+      repository-projects: write
 
 
     steps:
