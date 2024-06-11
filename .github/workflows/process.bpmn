@@ -8,9 +8,21 @@
       <bpmn:outgoing>Flow_102goxd</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:endEvent id="Event_018ox6m">
-      <bpmn:incoming>Flow_102goxd</bpmn:incoming>
+      <bpmn:incoming>Flow_1ni3cgz</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sequenceFlow id="Flow_102goxd" sourceRef="StartEvent_1" targetRef="Event_018ox6m" />
+    <bpmn:sequenceFlow id="Flow_102goxd" sourceRef="StartEvent_1" targetRef="Activity_1ycj7pa" />
+    <bpmn:sequenceFlow id="Flow_1ni3cgz" sourceRef="Activity_1ycj7pa" targetRef="Event_018ox6m" />
+    <bpmn:scriptTask id="Activity_1ycj7pa" name="Hiiii">
+      <bpmn:incoming>Flow_102goxd</bpmn:incoming>
+      <bpmn:outgoing>Flow_1ni3cgz</bpmn:outgoing>
+      <bpmn:script>#!/bin/bash
+
+curl -X POST \
+  -H "Accept: application/vnd.github.v3+json" \
+  -H "Authorization: token $GITHUB_TOKEN" \
+  https://api.github.com/repos/msob-test/repo_b/actions/workflows/main.yml/dispatches \
+  -d '{"ref":"main"}'</bpmn:script>
+    </bpmn:scriptTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_10wt42j">
@@ -24,8 +36,15 @@
       <bpmndi:BPMNShape id="Event_018ox6m_di" bpmnElement="Event_018ox6m">
         <dc:Bounds x="482" y="182" width="36" height="36" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_11qlqzw_di" bpmnElement="Activity_1ycj7pa">
+        <dc:Bounds x="330" y="160" width="100" height="80" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_102goxd_di" bpmnElement="Flow_102goxd">
         <di:waypoint x="278" y="200" />
+        <di:waypoint x="330" y="200" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ni3cgz_di" bpmnElement="Flow_1ni3cgz">
+        <di:waypoint x="430" y="200" />
         <di:waypoint x="482" y="200" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
