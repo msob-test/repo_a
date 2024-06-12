@@ -1,3 +1,5 @@
+xml
+Copy code
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_01l5frb" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.16.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.20.0">
   <bpmn:collaboration id="Collaboration_10wt42j">
@@ -12,20 +14,35 @@
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_102goxd" sourceRef="StartEvent_1" targetRef="Activity_1ycj7pa" />
     <bpmn:sequenceFlow id="Flow_1ni3cgz" sourceRef="Activity_1ycj7pa" targetRef="Event_018ox6m" />
-    <bpmn:scriptTask id="Activity_1ycj7pa" name="Hiiii">
+    <bpmn:serviceTask id="Activity_1ycj7pa" name="Call API" camunda:type="connector">
+      <bpmn:extensionElements>
+        <camunda:connector>
+          <camunda:connectorId>http-connector</camunda:connectorId>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="url">https://api.github.com/repos/msob-test/repo_b/actions/workflows/main.yml/dispatches</camunda:inputParameter>
+            <camunda:inputParameter name="method">POST</camunda:inputParameter>
+            <camunda:inputParameter name="headers">
+              <camunda:map>
+                <camunda:entry key="Accept">application/vnd.github+json</camunda:entry>
+                <camunda:entry key="Authorization">Bearer ${GITHUB_TOKEN}</camunda:entry>
+                <camunda:entry key="X-GitHub-Api-Version">2022-11-28</camunda:entry>
+                <camunda:entry key="Content-Type">application/json</camunda:entry>
+              </camunda:map>
+            </camunda:inputParameter>
+            <camunda:inputParameter name="payload">
+              <![CDATA[
+              {
+                "ref": "main"
+              }
+              ]]>
+            </camunda:inputParameter>
+            <camunda:outputParameter name="response">${response}</camunda:outputParameter>
+          </camunda:inputOutput>
+        </camunda:connector>
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_102goxd</bpmn:incoming>
       <bpmn:outgoing>Flow_1ni3cgz</bpmn:outgoing>
-      <bpmn:script>#!/bin/bash
-rs=$(curl --location 'https://api.github.com/repos/msob-test/repo_b/actions/workflows/main.yml/dispatches' \
-            --header 'Accept: application/vnd.github+json' \
-            --header "Authorization: Bearer $GITHUB_TOKEN" \
-            --header 'X-GitHub-Api-Version: 2022-11-28' \
-            --header 'Content-Type: application/json' \
-            --data '{
-                "ref": "main"
-            }')
-echo "Response from curl request: $rs"</bpmn:script>
-    </bpmn:scriptTask>
+    </bpmn:serviceTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_10wt42j">
