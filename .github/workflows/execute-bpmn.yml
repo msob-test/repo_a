@@ -41,13 +41,3 @@ jobs:
             http://localhost:8080/engine-rest/process-definition/key/process_a/start)
 
           echo "Response from curl request process: $response"
-
-          rs=$(curl --location 'https://api.github.com/repos/msob-test/repo_b/actions/workflows/main.yml/dispatches' \
-            --header 'Accept: application/vnd.github+json' \
-            --header "Authorization: Bearer $GITHUB_TOKEN" \
-            --header 'X-GitHub-Api-Version: 2022-11-28' \
-            --header 'Content-Type: application/json' \
-            --data '{
-                "ref": "main"
-            }')
-          echo "Response from curl request: $rs"
