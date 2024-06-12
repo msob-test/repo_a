@@ -41,3 +41,27 @@ jobs:
             http://localhost:8080/engine-rest/process-definition/key/process_a/start)
 
           echo "Response from curl request process: $response"
+
+          instance_id=$(echo $response | jq -r '.id')
+
+          echo "Process instance ID: $instance_id"
+          
+          if [ "$instance_id" = "null" ]; then
+            echo "Failed to start process instance"
+            echo "Response from curl request: $response"
+            exit 1
+          fi
+
+          sleep 10
+
+          instance_status=$(curl -s http://localhost:8080/engine-rest/process-instance/$instance_id)
+          echo "Process instance status: $instance_status"
+
+          if [[ "$instance_status" == *"ended"* ]]; then
+            echo "Process instance completed successfully"
+          else
+            echo "Process instance did not complete successfully. Fetching logs..."
+            logs=$(curl -s http://localhost:8080/engine-rest/history/activity-instance?processInstanceId=$instance_id)
+            echo "Process instance logs: $logs"
+            exit 1
+          fi
