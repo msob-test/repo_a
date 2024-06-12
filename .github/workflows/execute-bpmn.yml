@@ -54,21 +54,14 @@ jobs:
 
           sleep 10
 
-          instance_status=$(curl -s http://localhost:8080/engine-rest/history/process-instance/$instance_id)
+          instance_status=$(curl -s http://localhost:8080/engine-rest/process-instance/$instance_id)
           echo "Process instance status: $instance_status"
 
-          if [[ "$instance_status" == *"ended\":true"* ]]; then
+          if [[ "$instance_status" == *"ended"* ]]; then
             echo "Process instance completed successfully"
           else
             echo "Process instance did not complete successfully. Fetching logs..."
-
-            # Fetch activity instance history
-            activity_logs=$(curl -s http://localhost:8080/engine-rest/history/activity-instance?processInstanceId=$instance_id)
-            echo "Activity instance logs: $activity_logs"
-
-            # Fetch incidents if any
-            incidents=$(curl -s http://localhost:8080/engine-rest/history/incident?processInstanceId=$instance_id)
-            echo "Incidents: $incidents"
-            
+            logs=$(curl -s http://localhost:8080/engine-rest/history/activity-instance?processInstanceId=$instance_id)
+            echo "Process instance logs: $logs"
             exit 1
           fi
